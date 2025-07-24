@@ -38,6 +38,15 @@ class CarTypeMenuTest {
     }
 
     @Test
+    @DisplayName("CAR_TYPE | 0 선택, SUV")
+    void catType_select_0() {
+        Optional<Step> next = menu.input("0", builder);
+
+        verify(builder, never()).type(any());
+        assertEquals(Optional.of(Step.CAR_TYPE), next);
+    }
+
+    @Test
     @DisplayName("CAR_TYPE | 범위 밖 숫자 선택")
     void catType_select_9() {
         Optional<Step> next = menu.input("9", builder);
