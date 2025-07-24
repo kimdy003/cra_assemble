@@ -67,6 +67,21 @@ class TestProducedTest {
     }
 
     @Test
+    @DisplayName("TEST_PRODUCED | 브레이크 BOSCH, 조향장치 MOBIS")
+    void runProduced_fail_11() {
+        Car car = new Car.Builder()
+                .type(CarType.SEDAN)
+                .engine(Engine.TOYOTA)
+                .brake(Brake.BOSCH)
+                .steering(Steering.BOSCH)
+                .build();
+
+        testProduced.execute(car);
+        String outStr = outContent.toString();
+        assertTrue(outStr.contains("PASS"));
+    }
+
+    @Test
     @DisplayName("TEST_PRODUCED | SEDAN & CONTINENTAL")
     void testProduced_fail_2() {
         Car car = new Car.Builder()
@@ -84,7 +99,7 @@ class TestProducedTest {
 
     @Test
     @DisplayName("TEST_PRODUCED | SUB & TOYOTA")
-    void testProduced_fail_3() {
+    void testProduced_pass_3() {
         Car car = new Car.Builder()
                 .type(CarType.SUV)
                 .engine(Engine.TOYOTA)
@@ -96,6 +111,21 @@ class TestProducedTest {
         String outStr = outContent.toString();
         assertTrue(outStr.contains("FAIL"));
         assertTrue(outContent.toString().contains("SUV에는 TOYOTA 엔진 사용 불가"));
+    }
+
+    @Test
+    @DisplayName("TEST_PRODUCED | SUB & another")
+    void testProduced_fail_3_another() {
+        Car car = new Car.Builder()
+                .type(CarType.SUV)
+                .engine(Engine.WIA)
+                .brake(Brake.BOSCH)
+                .steering(Steering.MOBIS)
+                .build();
+
+        testProduced.execute(car);
+        String outStr = outContent.toString();
+        assertTrue(outStr.contains("FAIL"));
     }
 
     @Test
@@ -128,5 +158,20 @@ class TestProducedTest {
         String outStr = outContent.toString();
         assertTrue(outStr.contains("FAIL"));
         assertTrue(outContent.toString().contains("Truck에는 Mando 제동장치 사용 불가"));
+    }
+
+    @Test
+    @DisplayName("TEST_PRODUCED | TRUCK & another")
+    void testProduced_pass_5_another() {
+        Car car = new Car.Builder()
+                .type(CarType.TRUCK)
+                .engine(Engine.TOYOTA)
+                .brake(Brake.BOSCH)
+                .steering(Steering.MOBIS)
+                .build();
+
+        testProduced.execute(car);
+        String outStr = outContent.toString();
+        assertTrue(outStr.contains("FAIL"));
     }
 }

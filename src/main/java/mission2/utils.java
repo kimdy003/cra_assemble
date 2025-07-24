@@ -12,7 +12,7 @@ public class utils {
 
     public static void delay(int ms) {
         try {
-            Thread.sleep(ms);
+            Thread.sleep(0);
         } catch (InterruptedException ignored) {
         }
     }

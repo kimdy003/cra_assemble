@@ -43,6 +43,18 @@ class AssembleAppTest {
     }
 
     @Test
+    @DisplayName("ASSEMBLE | 처음으로 돌아가기")
+    void main_0() {
+        String input = String.join("\n", "1", "1", "1", "1", "0", "exit") + "\n";
+        System.setIn(new ByteArrayInputStream(input.getBytes()));
+
+        AssembleApp.main(new String[]{});
+
+        String out = outContent.toString();
+        assertTrue(out.contains("어떤 차량 타입을 선택할까요?"));
+    }
+
+    @Test
     @DisplayName("ASSEMBLE | 전체 1 선택")
     void main_all_1_pass() {
         String input = String.join("\n", "1", "1", "1", "1", "1", "exit") + "\n";

@@ -32,10 +32,6 @@ public class AssembleApp {
             }
 
             Optional<Step> next = menus.get(step).input(buf, builder);
-            if (next.isEmpty()) {
-                System.out.println("바이바이");
-                break;
-            }
             if (next.get() == Step.CAR_TYPE) {
                 builder = new Car.Builder();
             }
